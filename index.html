@@ -2,460 +2,655 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rei do Açai - Cardápio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Rei do Açai - Cardápio Digital</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Poppins', sans-serif;
-        }
-        .bg-glow {
-            background: radial-gradient(circle at center, #581c87 0%, #1e1b4b 100%);
-        }
-        .glass {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        /* Scrollbar suave */
-        ::-webkit-scrollbar {
-            width: 5px;
-        }
-        ::-webkit-scrollbar-track {
-            background: rgba(0,0,0,0.1);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: rgba(255,255,255,0.2);
-            border-radius: 10px;
-        }
+        body { font-family: 'Poppins', sans-serif; -webkit-tap-highlight-color: transparent; }
+        .bg-glow { background: radial-gradient(circle at center, #581c87 0%, #1e1b4b 100%); }
+        .glass { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .glass-active { background: rgba(147, 51, 234, 0.2); border-color: rgba(168, 85, 247, 0.5); }
+        
+        /* Animações suaves */
+        .fade-in { animation: fadeIn 0.3s ease-in-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.1); }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
     </style>
 </head>
-<body class="bg-glow min-h-screen text-white flex flex-col items-center pb-24">
+<body class="bg-glow min-h-screen text-white flex flex-col items-center pb-24 selection:bg-purple-500 selection:text-white">
 
-    <main class="w-full max-w-md px-6 py-12 flex flex-col items-center">
+    <main class="w-full max-w-md px-6 py-8 flex flex-col items-center flex-grow">
         
-        <!-- VISTA PRINCIPAL (HOME) -->
-        <div id="home-view" class="w-full flex flex-col items-center space-y-8">
-            <div class="relative">
-                <div class="absolute inset-0 bg-purple-500 blur-2xl opacity-20 rounded-full animate-pulse"></div>
+        <!-- ================= VISTA: HOME ================= -->
+        <div id="home-view" class="view-section w-full flex flex-col items-center space-y-8 fade-in">
+            <!-- Header / Logo -->
+            <div class="relative group">
+                <div class="absolute inset-0 bg-purple-500 blur-2xl opacity-20 rounded-full group-hover:opacity-30 transition-opacity duration-500"></div>
                 <div class="relative p-1 bg-gradient-to-tr from-purple-400 to-fuchsia-600 rounded-full shadow-2xl">
                     <img src="WhatsApp Image 2026-02-09 at 14.28.35.jpeg" 
                          alt="Logo Rei do Açai" 
                          class="w-40 h-40 rounded-full object-cover border-4 border-purple-950 shadow-inner"
-                         onerror="this.src='https://via.placeholder.com/160?text=Açai'">
+                         onerror="this.src='https://via.placeholder.com/160/4c1d95/ffffff?text=Rei+do+Açai'">
                 </div>
             </div>
 
             <div class="text-center space-y-2">
-                <h1 class="text-4xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-200 to-fuchsia-400">
+                <h1 class="text-4xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-200 to-fuchsia-400 drop-shadow-sm">
                     Rei do Açai
                 </h1>
                 <p class="text-purple-200/70 font-medium text-lg">O melhor sabor da região 👑</p>
             </div>
 
-            <div class="flex items-center gap-2 bg-green-500/10 border border-green-500/20 px-4 py-1 rounded-full">
-                <span class="w-2 h-2 bg-green-500 rounded-full animate-ping"></span>
-                <span class="text-green-400 text-sm font-semibold">Aberto agora</span>
+            <!-- Status de Funcionamento -->
+            <div class="flex items-center gap-2 bg-green-500/10 border border-green-500/20 px-4 py-1.5 rounded-full backdrop-blur-md">
+                <span class="relative flex h-3 w-3">
+                  <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span class="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+                </span>
+                <span class="text-green-400 text-sm font-semibold tracking-wide">Aberto agora</span>
             </div>
 
-            <h2 class="text-xl font-semibold pt-4">Faça seu pedido!</h2>
-
-            <div class="w-full flex flex-col gap-4">
-                <button onclick="showCategory('acai')" class="group relative w-full overflow-hidden rounded-2xl bg-gradient-to-r from-purple-600 to-purple-800 p-[2px] transition-all hover:scale-[1.02] active:scale-95 shadow-lg shadow-purple-900/20">
-                    <div class="flex items-center justify-between bg-purple-900/90 rounded-[14px] px-8 py-5 transition-all group-hover:bg-transparent">
+            <!-- Menu Principal -->
+            <div class="w-full space-y-4 pt-4">
+                <h2 class="text-xl font-semibold text-center mb-6">Faça seu pedido!</h2>
+                
+                <button onclick="app.navigateTo('acai-view')" class="group w-full relative overflow-hidden rounded-2xl bg-gradient-to-r from-purple-600 to-purple-800 p-[2px] transition-transform active:scale-95 shadow-lg shadow-purple-900/30">
+                    <div class="flex items-center justify-between bg-purple-900/90 rounded-[14px] px-6 py-5 transition-colors group-hover:bg-transparent">
                         <div class="flex flex-col items-start">
                             <span class="text-xl font-bold">Açaí</span>
-                            <span class="text-xs text-purple-300 opacity-70">Monte do seu jeito</span>
+                            <span class="text-xs text-purple-300 opacity-80">Monte do seu jeito</span>
                         </div>
-                        <span class="text-2xl">🍧</span>
+                        <span class="text-3xl">🍧</span>
                     </div>
                 </button>
 
-                <button onclick="showCategory('lanches')" class="group relative w-full overflow-hidden rounded-2xl bg-gradient-to-r from-fuchsia-600 to-pink-700 p-[2px] transition-all hover:scale-[1.02] active:scale-95 shadow-lg shadow-pink-900/20">
-                    <div class="flex items-center justify-between bg-purple-950/90 rounded-[14px] px-8 py-5 transition-all group-hover:bg-transparent">
+                <button onclick="app.navigateTo('lanches-view')" class="group w-full relative overflow-hidden rounded-2xl bg-gradient-to-r from-pink-600 to-rose-700 p-[2px] transition-transform active:scale-95 shadow-lg shadow-pink-900/30">
+                    <div class="flex items-center justify-between bg-purple-950/90 rounded-[14px] px-6 py-5 transition-colors group-hover:bg-transparent">
                         <div class="flex flex-col items-start">
                             <span class="text-xl font-bold">Lanches</span>
-                            <span class="text-xs text-fuchsia-300 opacity-70">Artesanais e suculentos</span>
+                            <span class="text-xs text-fuchsia-300 opacity-80">Artesanais e suculentos</span>
                         </div>
-                        <span class="text-2xl">🍔</span>
+                        <span class="text-3xl">🍔</span>
                     </div>
                 </button>
             </div>
         </div>
 
-        <!-- VISTA CARDÁPIO AÇAÍ -->
-        <div id="acai-view" class="hidden w-full flex flex-col space-y-6">
-            <div class="flex items-center gap-4">
-                <button onclick="showHome()" class="p-2 bg-purple-800/50 rounded-full hover:bg-purple-700 transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                    </svg>
+        <!-- ================= VISTA: AÇAÍ ================= -->
+        <div id="acai-view" class="view-section hidden w-full flex-col space-y-6 fade-in">
+            <div class="flex items-center gap-4 sticky top-0 bg-purple-900/0 backdrop-blur-sm py-2 z-10">
+                <button onclick="app.navigateTo('home-view')" class="p-2 bg-white/10 rounded-full hover:bg-white/20 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
                 </button>
-                <h2 class="text-2xl font-bold italic text-purple-200">Tamanhos de Açaí:</h2>
+                <h2 class="text-2xl font-bold italic text-purple-200">Tamanhos de Açaí</h2>
             </div>
 
             <div class="grid grid-cols-1 gap-4">
-                <div class="glass p-4 rounded-2xl flex items-center justify-between group hover:border-purple-400 transition-all">
+                <!-- Item Generator Helper -->
+                <div class="glass p-4 rounded-2xl flex items-center justify-between">
                     <div class="flex items-center gap-4">
                         <div class="w-14 h-14 bg-purple-800 rounded-xl flex items-center justify-center text-2xl shadow-lg">🥤</div>
-                        <div>
-                            <h3 class="font-bold">Copo 300ml</h3>
-                            <span class="text-green-400 font-bold block">R$ 8,00</span>
-                        </div>
+                        <div><h3 class="font-bold">Copo 300ml</h3><span class="text-green-400 font-bold block">R$ 8,00</span></div>
                     </div>
-                    <button onclick="openComplementos('Açaí 300ml', 'acai', 8)" class="bg-purple-600 w-10 h-10 rounded-full hover:bg-purple-500 shadow-lg flex items-center justify-center font-bold text-xl">+</button>
+                    <button onclick="app.openComplements('Açaí 300ml', 'acai', 8)" class="bg-purple-600 w-10 h-10 rounded-full hover:bg-purple-500 shadow-lg flex items-center justify-center font-bold text-xl transition-colors">+</button>
                 </div>
-                <div class="glass p-4 rounded-2xl flex items-center justify-between group hover:border-purple-400 transition-all">
+
+                <div class="glass p-4 rounded-2xl flex items-center justify-between">
                     <div class="flex items-center gap-4">
                         <div class="w-14 h-14 bg-purple-800 rounded-xl flex items-center justify-center text-2xl shadow-lg">🥤</div>
-                        <div>
-                            <h3 class="font-bold">Copo 400ml</h3>
-                            <span class="text-green-400 font-bold block">R$ 10,00</span>
-                        </div>
+                        <div><h3 class="font-bold">Copo 400ml</h3><span class="text-green-400 font-bold block">R$ 10,00</span></div>
                     </div>
-                    <button onclick="openComplementos('Açaí 400ml', 'acai', 10)" class="bg-purple-600 w-10 h-10 rounded-full hover:bg-purple-500 shadow-lg flex items-center justify-center font-bold text-xl">+</button>
+                    <button onclick="app.openComplements('Açaí 400ml', 'acai', 10)" class="bg-purple-600 w-10 h-10 rounded-full hover:bg-purple-500 shadow-lg flex items-center justify-center font-bold text-xl transition-colors">+</button>
                 </div>
-                <div class="glass p-4 rounded-2xl flex items-center justify-between group border border-purple-500/30">
-                    <div class="flex items-center gap-4">
+
+                <div class="glass p-4 rounded-2xl flex items-center justify-between border border-purple-500/40 relative overflow-hidden">
+                    <div class="absolute -right-8 -top-8 w-24 h-24 bg-purple-500/20 rounded-full blur-xl"></div>
+                    <div class="flex items-center gap-4 relative z-10">
                         <div class="w-14 h-14 bg-purple-800 rounded-xl flex items-center justify-center text-2xl relative shadow-lg">
-                            <span class="absolute -top-2 -right-2 bg-red-500 text-[8px] px-1.5 py-0.5 rounded-full animate-bounce">TOP</span>
+                            <span class="absolute -top-2 -right-2 bg-red-500 text-[9px] font-bold px-1.5 py-0.5 rounded-full animate-bounce shadow-sm">TOP</span>
                             🥤
                         </div>
-                        <div>
-                            <h3 class="font-bold text-lg">Copo 500ml</h3>
-                            <span class="text-green-400 font-bold block">R$ 12,00</span>
-                        </div>
+                        <div><h3 class="font-bold text-lg">Copo 500ml</h3><span class="text-green-400 font-bold block">R$ 12,00</span></div>
                     </div>
-                    <button onclick="openComplementos('Açaí 500ml', 'acai', 12)" class="bg-purple-600 w-10 h-10 rounded-full hover:bg-purple-500 shadow-lg flex items-center justify-center font-bold text-xl">+</button>
+                    <button onclick="app.openComplements('Açaí 500ml', 'acai', 12)" class="bg-purple-600 w-10 h-10 rounded-full hover:bg-purple-500 shadow-lg flex items-center justify-center font-bold text-xl transition-colors relative z-10">+</button>
                 </div>
-                <div class="glass p-4 rounded-2xl flex items-center justify-between group hover:border-purple-400 transition-all">
+
+                <div class="glass p-4 rounded-2xl flex items-center justify-between">
                     <div class="flex items-center gap-4">
-                        <div class="w-14 h-14 bg-purple-800 rounded-xl flex items-center justify-center text-2xl shadow-lg">🏺</div>
-                        <div>
-                            <h3 class="font-bold">Copo 700ml</h3>
-                            <span class="text-green-400 font-bold block">R$ 24,00</span>
-                        </div>
+                        <div class="w-14 h-14 bg-purple-800 rounded-xl flex items-center justify-center text-3xl shadow-lg">🏺</div>
+                        <div><h3 class="font-bold">Copo 700ml</h3><span class="text-green-400 font-bold block">R$ 24,00</span></div>
                     </div>
-                    <button onclick="openComplementos('Açaí 700ml', 'acai', 24)" class="bg-purple-600 w-10 h-10 rounded-full hover:bg-purple-500 shadow-lg flex items-center justify-center font-bold text-xl">+</button>
+                    <button onclick="app.openComplements('Açaí 700ml', 'acai', 24)" class="bg-purple-600 w-10 h-10 rounded-full hover:bg-purple-500 shadow-lg flex items-center justify-center font-bold text-xl transition-colors">+</button>
                 </div>
             </div>
         </div>
 
-        <!-- VISTA CARDÁPIO LANCHES -->
-        <div id="lanches-view" class="hidden w-full flex flex-col space-y-6">
-            <div class="flex items-center gap-4">
-                <button onclick="showHome()" class="p-2 bg-pink-800/50 rounded-full hover:bg-pink-700 transition-colors text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                    </svg>
+        <!-- ================= VISTA: LANCHES ================= -->
+        <div id="lanches-view" class="view-section hidden w-full flex-col space-y-6 fade-in">
+            <div class="flex items-center gap-4 sticky top-0 bg-purple-900/0 backdrop-blur-sm py-2 z-10">
+                <button onclick="app.navigateTo('home-view')" class="p-2 bg-white/10 rounded-full hover:bg-white/20 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
                 </button>
-                <h2 class="text-2xl font-bold italic text-pink-200">Nossos Lanches:</h2>
+                <h2 class="text-2xl font-bold italic text-pink-200">Nossos Lanches</h2>
             </div>
 
             <div class="grid grid-cols-1 gap-4">
-                <div class="glass p-4 rounded-2xl flex items-center justify-between group hover:border-pink-400 transition-all">
+                <div class="glass p-4 rounded-2xl flex items-center justify-between hover:border-pink-400 transition-colors">
                     <div class="flex items-center gap-4">
                         <div class="w-14 h-14 bg-pink-900/50 rounded-xl flex items-center justify-center text-2xl">🌭</div>
-                        <div>
-                            <h3 class="font-bold">Cachorro-Quente</h3>
-                            <span class="text-green-400 font-bold block">R$ 10,00</span>
-                        </div>
+                        <div><h3 class="font-bold">Cachorro-Quente</h3><span class="text-green-400 font-bold block">R$ 10,00</span></div>
                     </div>
-                    <button onclick="openComplementos('Cachorro-Quente', 'lanche', 10)" class="bg-pink-600 w-10 h-10 rounded-full hover:bg-pink-500 flex items-center justify-center font-bold text-xl">+</button>
+                    <button onclick="app.openComplements('Cachorro-Quente', 'lanche', 10)" class="bg-pink-600 w-10 h-10 rounded-full hover:bg-pink-500 flex items-center justify-center font-bold text-xl shadow-lg transition-colors">+</button>
                 </div>
-                <div class="glass p-4 rounded-2xl flex items-center justify-between group hover:border-pink-400 transition-all">
+
+                <div class="glass p-4 rounded-2xl flex items-center justify-between hover:border-pink-400 transition-colors">
                     <div class="flex items-center gap-4">
                         <div class="w-14 h-14 bg-pink-900/50 rounded-xl flex items-center justify-center text-2xl">🍔</div>
-                        <div>
-                            <h3 class="font-bold">X-Salada</h3>
-                            <span class="text-green-400 font-bold block">R$ 16,00</span>
-                        </div>
+                        <div><h3 class="font-bold">X-Salada</h3><span class="text-green-400 font-bold block">R$ 16,00</span></div>
                     </div>
-                    <button onclick="openComplementos('X-Salada', 'lanche', 16)" class="bg-pink-600 w-10 h-10 rounded-full hover:bg-pink-500 flex items-center justify-center font-bold text-xl">+</button>
+                    <button onclick="app.openComplements('X-Salada', 'lanche', 16)" class="bg-pink-600 w-10 h-10 rounded-full hover:bg-pink-500 flex items-center justify-center font-bold text-xl shadow-lg transition-colors">+</button>
                 </div>
-                <div class="glass p-4 rounded-2xl flex items-center justify-between group hover:border-pink-400 transition-all">
-                    <div class="flex items-center gap-4">
+
+                <div class="glass p-4 rounded-2xl flex items-center justify-between border border-pink-500/40 relative overflow-hidden">
+                    <div class="absolute -right-8 -top-8 w-24 h-24 bg-pink-500/20 rounded-full blur-xl"></div>
+                    <div class="flex items-center gap-4 relative z-10">
                         <div class="w-14 h-14 bg-pink-900/50 rounded-xl flex items-center justify-center text-2xl text-yellow-400">🔥</div>
-                        <div>
-                            <h3 class="font-bold">X-Calabresa</h3>
-                            <span class="text-green-400 font-bold block">R$ 20,00</span>
-                        </div>
+                        <div><h3 class="font-bold">X-Calabresa</h3><span class="text-green-400 font-bold block">R$ 20,00</span></div>
                     </div>
-                    <button onclick="openComplementos('X-Calabresa', 'lanche', 20)" class="bg-pink-600 w-10 h-10 rounded-full hover:bg-pink-500 flex items-center justify-center font-bold text-xl">+</button>
+                    <button onclick="app.openComplements('X-Calabresa', 'lanche', 20)" class="bg-pink-600 w-10 h-10 rounded-full hover:bg-pink-500 flex items-center justify-center font-bold text-xl shadow-lg transition-colors relative z-10">+</button>
                 </div>
             </div>
         </div>
 
-        <!-- VISTA COMPLEMENTOS -->
-        <div id="complementos-view" class="hidden w-full flex flex-col space-y-6">
+        <!-- ================= VISTA: COMPLEMENTOS ================= -->
+        <div id="complementos-view" class="view-section hidden w-full flex-col space-y-6 fade-in h-full">
             <div class="flex items-center gap-4">
-                <button id="btn-back-complementos" class="p-2 bg-white/10 rounded-full hover:bg-white/20">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                    </svg>
+                <button id="btn-back-complementos" class="p-2 bg-white/10 rounded-full hover:bg-white/20 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
                 </button>
                 <div>
-                    <h2 id="complemento-title" class="text-2xl font-bold italic">Personalizar</h2>
-                    <p id="item-base-price" class="text-xs text-purple-300 italic">Preço base: R$ 0,00</p>
+                    <h2 id="complemento-title" class="text-2xl font-bold italic truncate max-w-[200px]">Personalizar</h2>
+                    <p id="item-free-info" class="text-xs text-green-300 italic font-bold">Escolha seus favoritos</p>
                 </div>
             </div>
 
-            <div class="space-y-4 max-h-[50vh] overflow-y-auto pr-2">
-                <h3 class="text-sm font-semibold uppercase tracking-wider text-purple-400">Escolha os Adicionais:</h3>
-                <div id="options-container" class="grid grid-cols-1 gap-2">
-                    <!-- Opções via JS -->
+            <div class="flex-grow space-y-4 overflow-y-auto pr-1">
+                <h3 class="text-sm font-semibold uppercase tracking-wider text-purple-400 border-b border-purple-500/30 pb-2">Selecione os Adicionais:</h3>
+                <div id="options-container" class="grid grid-cols-1 gap-3 pb-4">
+                    <!-- Opções geradas via JS -->
                 </div>
             </div>
 
-            <div class="pt-4">
-                <button onclick="confirmOrder()" class="w-full bg-gradient-to-r from-green-500 to-emerald-700 py-4 rounded-2xl font-bold shadow-lg hover:scale-[1.02] active:scale-95 transition-all text-white">
-                    Confirmar e Continuar Comprando
+            <div class="pt-2 pb-6 mt-auto sticky bottom-0 bg-[#251e54] z-20">
+                <button onclick="app.confirmOrder()" class="w-full bg-gradient-to-r from-green-500 to-emerald-700 py-4 rounded-2xl font-bold shadow-xl shadow-green-900/30 hover:scale-[1.02] active:scale-95 transition-all text-white flex items-center justify-center gap-2">
+                    <span>Adicionar ao Pedido</span>
+                    <span id="btn-total-preview" class="bg-black/20 px-2 py-0.5 rounded text-xs">R$ 0,00</span>
                 </button>
             </div>
         </div>
 
-        <!-- VISTA CARRINHO (FULL SCREEN) -->
-        <div id="cart-view" class="hidden w-full flex flex-col space-y-6">
-            <div class="flex items-center gap-4">
-                <button onclick="goBackFromCart()" class="p-2 bg-white/10 rounded-full">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                    </svg>
-                </button>
-                <h2 class="text-2xl font-bold italic">Meu Pedido</h2>
+        <!-- ================= VISTA: CARRINHO ================= -->
+        <div id="cart-view" class="view-section hidden w-full flex-col space-y-6 pb-20 fade-in">
+            <div class="flex items-center justify-between gap-4">
+                <div class="flex items-center gap-4">
+                    <button onclick="app.goBackFromCart()" class="p-2 bg-white/10 rounded-full hover:bg-white/20 transition-colors">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                    </button>
+                    <h2 class="text-2xl font-bold italic text-purple-200">Meu Pedido</h2>
+                </div>
+                <button onclick="app.clearCart()" class="text-xs text-red-400 hover:text-red-300 font-bold uppercase tracking-wider p-2">Limpar</button>
             </div>
 
-            <div id="cart-items" class="space-y-3">
-                <!-- Itens -->
+            <div id="cart-items" class="space-y-4">
+                <!-- Itens do carrinho -->
             </div>
 
-            <div id="cart-empty-msg" class="hidden py-10 text-center opacity-50">
-                <p>O carrinho ainda está vazio...</p>
+            <div id="cart-empty-msg" class="hidden flex-col items-center justify-center py-12 opacity-60">
+                <span class="text-4xl mb-3">🛒</span>
+                <p>Seu carrinho está vazio.</p>
+                <button onclick="app.navigateTo('home-view')" class="mt-4 text-purple-400 underline font-bold">Ver Cardápio</button>
             </div>
 
+            <!-- Opções de Entrega -->
+            <div id="delivery-section" class="pt-6 border-t border-white/10 space-y-5">
+                <div class="space-y-3">
+                    <h3 class="text-xs font-bold uppercase text-purple-400 tracking-widest flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" /><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
+                        Forma de Entrega
+                    </h3>
+                    <div class="flex p-1 bg-black/20 rounded-xl">
+                        <button onclick="app.setDeliveryMethod('entrega')" id="btn-delivery" class="flex-1 py-3 rounded-lg font-bold text-sm transition-all duration-300 bg-purple-600 shadow-lg">Tele-entrega</button>
+                        <button onclick="app.setDeliveryMethod('retirada')" id="btn-pickup" class="flex-1 py-3 rounded-lg font-bold text-sm transition-all duration-300 text-white/50 hover:text-white">Retirada</button>
+                    </div>
+                </div>
+                
+                <div id="address-container" class="space-y-2 fade-in">
+                    <label class="text-xs text-purple-300 ml-1 font-semibold">Endereço de Entrega:</label>
+                    <div class="relative">
+                        <input type="text" id="user-address" placeholder="Rua, Número, Bairro e Referência..." class="w-full bg-purple-900/30 border border-purple-500/30 rounded-xl px-4 py-4 text-sm focus:outline-none focus:border-purple-400 focus:bg-purple-900/50 transition-colors placeholder-purple-300/30">
+                        <span class="absolute right-4 top-4 text-purple-400/50">🏠</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Total e Enviar -->
             <div id="cart-total-section" class="pt-6 border-t border-white/10 space-y-4">
-                <div class="flex justify-between items-center text-xl font-bold">
-                    <span>Subtotal:</span>
-                    <span id="cart-total" class="text-green-400">R$ 0,00</span>
+                <div class="flex justify-between items-end text-xl font-bold bg-white/5 p-4 rounded-xl border border-white/5">
+                    <span class="text-sm text-gray-300 mb-1">Total a pagar:</span>
+                    <span id="cart-total" class="text-2xl text-green-400">R$ 0,00</span>
                 </div>
-                <button onclick="sendWhatsAppOrder()" class="w-full bg-green-600 py-5 rounded-2xl font-bold flex items-center justify-center gap-3 shadow-xl">
-                    Finalizar Pedido no WhatsApp
+                
+                <button onclick="app.sendWhatsAppOrder()" class="w-full bg-[#25D366] hover:bg-[#20bd5a] py-4 rounded-2xl font-bold flex items-center justify-center gap-3 shadow-xl transition-all active:scale-[0.98] text-white">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+                    <span>Enviar Pedido</span>
                 </button>
-                <button onclick="clearCart()" class="w-full text-red-400 text-sm font-bold uppercase py-2">Esvaziar Carrinho</button>
             </div>
         </div>
-
-        <!-- RODAPÉ -->
-        <footer class="pt-12 flex flex-col items-center gap-4 opacity-40 mt-auto">
-            <p class="text-[10px] uppercase tracking-[0.2em] text-center">© 2026 Rei do Açai • Premium Quality</p>
-        </footer>
-
+        
     </main>
 
-    <!-- BARRA FLUTUANTE ESTILO IFOOD -->
-    <div id="cart-bottom-bar" class="fixed bottom-0 left-0 w-full p-4 transform translate-y-full transition-transform duration-300 z-50">
-        <button onclick="showCart()" class="w-full max-w-md mx-auto bg-purple-600 hover:bg-purple-500 text-white flex items-center justify-between px-6 py-4 rounded-2xl shadow-2xl border border-purple-400/30">
+    <!-- BARRA FLUTUANTE INFERIOR -->
+    <div id="cart-bottom-bar" class="fixed bottom-0 left-0 w-full p-4 transform translate-y-[120%] transition-transform duration-500 ease-out z-50">
+        <button onclick="app.navigateTo('cart-view')" class="w-full max-w-md mx-auto bg-purple-600 hover:bg-purple-500 text-white flex items-center justify-between px-6 py-4 rounded-2xl shadow-2xl border border-purple-400/30 backdrop-blur-md">
             <div class="flex items-center gap-3">
-                <div class="bg-purple-900/50 w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm" id="bar-count">1</div>
-                <span class="font-bold">Ver Carrinho</span>
+                <div class="bg-purple-900/50 w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm" id="bar-count">0</div>
+                <div class="flex flex-col items-start">
+                    <span class="font-bold text-sm uppercase tracking-wide">Ver Carrinho</span>
+                </div>
             </div>
-            <span class="font-bold text-lg" id="bar-total">R$ 0,00</span>
+            <span class="font-bold text-lg text-green-200" id="bar-total">R$ 0,00</span>
         </button>
     </div>
 
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed top-6 left-1/2 transform -translate-x-1/2 bg-white text-purple-900 px-6 py-3 rounded-full shadow-2xl z-[60] flex items-center gap-2 transition-all duration-300 opacity-0 translate-y-[-20px] pointer-events-none font-semibold">
+        <span>✅</span> <span id="toast-msg">Sucesso!</span>
+    </div>
+
     <script>
-        let currentType = '';
-        let currentItemName = '';
-        let currentItemPrice = 0;
-        let cart = [];
+        // Lógica Principal do Aplicativo
+        const app = {
+            // Estado
+            state: {
+                currentView: 'home-view',
+                previousCategory: null,
+                cart: [],
+                deliveryMethod: 'entrega', // 'entrega' ou 'retirada'
+                tempItem: null, // Item sendo personalizado
+            },
 
-        const complementosData = {
-            acai: [
-                { name: 'Morango', price: 0 }, { name: 'Abacaxi', price: 0 }, { name: 'Banana', price: 0 },
-                { name: 'Uva', price: 0 }, { name: 'Leite em pó', price: 0 }, { name: 'Leite Condensado', price: 0 },
-                { name: 'Granola', price: 0 }, { name: 'Paçoca', price: 0 }, { name: 'Nutella', price: 5.00 },
-                { name: 'Oreo', price: 0 }, { name: 'Chocoball', price: 0 }
-            ],
-            lanche: [
-                { name: 'Ovo Extra', price: 2 }, { name: 'Bacon Extra', price: 4 },
-                { name: 'Hambúrguer Extra', price: 6 }, { name: 'Cheddar', price: 3 }
-            ],
-        };
+            // Dados
+            data: {
+                complements: {
+                    acai: [
+                        { name: 'Morango', price: 3.00 }, { name: 'Abacaxi', price: 3.00 }, { name: 'Banana', price: 3.00 },
+                        { name: 'Uva', price: 3.00 }, { name: 'Leite em pó', price: 3.00 }, { name: 'Leite Condensado', price: 3.00 },
+                        { name: 'Granola', price: 3.00 }, { name: 'Paçoca', price: 3.00 }, { name: 'Nutella', price: 5.00 },
+                        { name: 'Oreo', price: 3.00 }, { name: 'Chocoball', price: 3.00 }, { name: 'Confete', price: 3.00 }
+                    ],
+                    lanche: [
+                        { name: 'Ovo Extra', price: 2.00 }, { name: 'Bacon Extra', price: 4.00 },
+                        { name: 'Hambúrguer Extra', price: 6.00 }, { name: 'Cheddar', price: 3.00 },
+                        { name: 'Maionese Caseira', price: 0 }
+                    ]
+                }
+            },
 
-        function showCategory(category) {
-            hideAllViews();
-            if(category === 'acai') {
-                document.getElementById('acai-view').classList.remove('hidden');
-            } else if(category === 'lanches') {
-                document.getElementById('lanches-view').classList.remove('hidden');
-            }
-            currentType = category;
-            window.scrollTo(0, 0);
-        }
+            // Inicialização
+            init: function() {
+                this.updateCartUI();
+            },
 
-        function showHome() {
-            hideAllViews();
-            document.getElementById('home-view').classList.remove('hidden');
-            window.scrollTo(0, 0);
-        }
-
-        function openComplementos(itemName, type, basePrice) {
-            currentType = type;
-            currentItemName = itemName;
-            currentItemPrice = basePrice;
-            
-            hideAllViews();
-            document.getElementById('complementos-view').classList.remove('hidden');
-            document.getElementById('complemento-title').innerText = itemName;
-            document.getElementById('item-base-price').innerText = `Preço base: R$ ${basePrice.toFixed(2)}`;
-            
-            document.getElementById('btn-back-complementos').onclick = () => showCategory(type);
-
-            const container = document.getElementById('options-container');
-            container.innerHTML = '';
-            
-            const options = complementosData[type];
-            options.forEach(opt => {
-                const div = document.createElement('div');
-                div.className = 'glass p-4 rounded-xl flex items-center justify-between cursor-pointer hover:bg-white/5 transition-all';
-                div.innerHTML = `
-                    <div class="flex items-center gap-3">
-                        <input type="checkbox" data-name="${opt.name}" data-price="${opt.price}" class="complemento-cb w-5 h-5 accent-purple-500 rounded border-none pointer-events-none">
-                        <span class="font-medium text-sm">${opt.name}</span>
-                    </div>
-                    <span class="text-xs font-bold text-green-400">${opt.price === 0 ? 'Grátis' : 'R$ '+opt.price.toFixed(2)}</span>
-                `;
-                div.onclick = () => {
-                    const cb = div.querySelector('input');
-                    cb.checked = !cb.checked;
-                };
-                container.appendChild(div);
-            });
-            window.scrollTo(0, 0);
-        }
-
-        function hideAllViews() {
-            const views = ['home-view', 'acai-view', 'lanches-view', 'complementos-view', 'cart-view'];
-            views.forEach(id => document.getElementById(id).classList.add('hidden'));
-        }
-
-        function confirmOrder() {
-            const selectedComps = [];
-            let extraPrice = 0;
-            
-            document.querySelectorAll('.complemento-cb:checked').forEach(cb => {
-                selectedComps.push(cb.dataset.name);
-                extraPrice += parseFloat(cb.dataset.price);
-            });
-
-            cart.push({
-                id: Date.now(),
-                name: currentItemName,
-                totalPrice: currentItemPrice + extraPrice,
-                complements: selectedComps
-            });
-
-            updateCartUI();
-            
-            // VOLTA PARA ONDE ESTAVA (iFood style)
-            showCategory(currentType);
-
-            // Toast de sucesso
-            showToast('Adicionado com sucesso! ✅');
-        }
-
-        function updateCartUI() {
-            const bar = document.getElementById('cart-bottom-bar');
-            const total = cart.reduce((acc, item) => acc + item.totalPrice, 0);
-            
-            if (cart.length > 0) {
-                bar.classList.remove('translate-y-full');
-                document.getElementById('bar-count').innerText = cart.length;
-                document.getElementById('bar-total').innerText = `R$ ${total.toFixed(2)}`;
-            } else {
-                bar.classList.add('translate-y-full');
-            }
-        }
-
-        function showCart() {
-            hideAllViews();
-            document.getElementById('cart-view').classList.remove('hidden');
-            
-            const container = document.getElementById('cart-items');
-            const emptyMsg = document.getElementById('cart-empty-msg');
-            const totalSection = document.getElementById('cart-total-section');
-            
-            container.innerHTML = '';
-            
-            if (cart.length === 0) {
-                emptyMsg.classList.remove('hidden');
-                totalSection.classList.add('hidden');
-            } else {
-                emptyMsg.classList.add('hidden');
-                totalSection.classList.remove('hidden');
+            // Navegação
+            navigateTo: function(viewId) {
+                // Esconder todas as views
+                document.querySelectorAll('.view-section').forEach(el => el.classList.add('hidden'));
                 
-                cart.forEach(item => {
+                // Mostrar a view desejada
+                const target = document.getElementById(viewId);
+                target.classList.remove('hidden');
+                target.classList.add('fade-in'); // Reiniciar animação
+                
+                // Salvar contexto para o botão "Voltar"
+                if (viewId === 'acai-view') this.state.previousCategory = 'acai-view';
+                if (viewId === 'lanches-view') this.state.previousCategory = 'lanches-view';
+                
+                this.state.currentView = viewId;
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                // Controle da barra inferior
+                this.toggleBottomBar(viewId !== 'cart-view' && viewId !== 'complementos-view');
+            },
+
+            goBackFromCart: function() {
+                if (this.state.previousCategory) {
+                    this.navigateTo(this.state.previousCategory);
+                } else {
+                    this.navigateTo('home-view');
+                }
+            },
+
+            // Lógica de Complementos
+            openComplements: function(name, type, basePrice) {
+                // Definir limite baseado no tamanho
+                let freeLimit = 0;
+                if (type === 'acai') {
+                    if (name.includes('300ml')) freeLimit = 2;
+                    else if (name.includes('400ml')) freeLimit = 3;
+                    else if (name.includes('500ml') || name.includes('700ml')) freeLimit = 4;
+                }
+
+                this.state.tempItem = {
+                    id: Date.now(),
+                    name: name,
+                    type: type,
+                    basePrice: basePrice,
+                    freeLimit: freeLimit,
+                    selectedComplements: []
+                };
+
+                // UI Updates
+                document.getElementById('complemento-title').innerText = name;
+                const infoText = freeLimit > 0 ? `(Até ${freeLimit} opções grátis)` : 'Personalize seu pedido';
+                document.getElementById('item-free-info').innerText = infoText;
+                
+                // Botão de voltar específico
+                document.getElementById('btn-back-complementos').onclick = () => {
+                    this.navigateTo(type === 'acai' ? 'acai-view' : 'lanches-view');
+                };
+
+                // Renderizar Opções
+                const container = document.getElementById('options-container');
+                container.innerHTML = '';
+                
+                const options = this.data.complements[type] || [];
+                
+                options.forEach((opt, idx) => {
                     const div = document.createElement('div');
-                    div.className = 'glass p-4 rounded-2xl flex justify-between items-start';
+                    div.className = 'glass p-4 rounded-xl flex items-center justify-between cursor-pointer hover:bg-white/5 transition-all select-none';
+                    
+                    let priceText = '';
+                    if (type === 'acai' && opt.price <= 3.00) {
+                        priceText = 'Grátis*'; // Visualmente grátis se estiver no limite
+                    } else if (opt.price === 0) {
+                        priceText = 'Grátis';
+                    } else {
+                        priceText = '+ ' + this.formatMoney(opt.price);
+                    }
+
                     div.innerHTML = `
-                        <div class="flex-1">
-                            <h4 class="font-bold text-lg leading-tight">${item.name}</h4>
-                            <p class="text-[10px] text-purple-200/50 mt-1 italic">
-                                ${item.complements.join(', ') || 'Simples'}
-                            </p>
-                            <span class="text-green-400 font-bold text-sm block mt-2">R$ ${item.totalPrice.toFixed(2)}</span>
+                        <div class="flex items-center gap-3">
+                            <div class="relative flex items-center justify-center">
+                                <input type="checkbox" id="comp-${idx}" class="peer appearance-none w-5 h-5 border-2 border-purple-400 rounded checked:bg-purple-500 checked:border-purple-500 transition-colors">
+                                <svg class="absolute w-3 h-3 text-white hidden peer-checked:block pointer-events-none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            </div>
+                            <span class="font-medium text-sm">${opt.name}</span>
                         </div>
-                        <button onclick="removeItem(${item.id})" class="p-2 text-red-400 hover:bg-red-400/10 rounded-lg">✕</button>
+                        <span class="text-xs font-bold ${priceText.includes('Grátis') ? 'text-green-400' : 'text-purple-300'}">
+                            ${priceText}
+                        </span>
                     `;
+                    
+                    // Toggle Logic
+                    div.onclick = (e) => {
+                        if (e.target.tagName !== 'INPUT') {
+                            const checkbox = div.querySelector('input');
+                            checkbox.checked = !checkbox.checked;
+                        }
+                        this.updateTempItemTotal();
+                    };
+                    
+                    // Adicionar dados ao elemento para fácil acesso
+                    div.querySelector('input').dataset.name = opt.name;
+                    div.querySelector('input').dataset.price = opt.price;
+                    
                     container.appendChild(div);
                 });
+
+                if(type === 'acai') {
+                     const obs = document.createElement('div');
+                     obs.className = "text-[10px] text-purple-300/50 italic px-2 pt-1";
+                     obs.innerText = "* Itens padrão excedentes custam R$ 3,00 cada.";
+                     container.appendChild(obs);
+                }
+
+                this.updateTempItemTotal(); // Reset total display
+                this.navigateTo('complementos-view');
+            },
+
+            updateTempItemTotal: function() {
+                const inputs = document.querySelectorAll('#options-container input:checked');
+                let extra = 0;
                 
-                const totalGeral = cart.reduce((acc, item) => acc + item.totalPrice, 0);
-                document.getElementById('cart-total').innerText = `R$ ${totalGeral.toFixed(2)}`;
+                // Lógica de Limite Grátis para Açaí
+                if (this.state.tempItem.type === 'acai' && this.state.tempItem.freeLimit > 0) {
+                    const selected = [];
+                    inputs.forEach(input => {
+                        selected.push({
+                            price: parseFloat(input.dataset.price),
+                            name: input.dataset.name
+                        });
+                    });
+
+                    // Separar itens que podem ser grátis (padrão) dos premium
+                    // Assumimos que itens <= 3.00 são padrão e elegíveis para slot grátis
+                    const standardItems = selected.filter(i => i.price <= 3.00);
+                    const premiumItems = selected.filter(i => i.price > 3.00);
+                    
+                    // Contar quantos padrão excedem o limite
+                    const freeCount = Math.min(standardItems.length, this.state.tempItem.freeLimit);
+                    const paidStandardCount = Math.max(0, standardItems.length - this.state.tempItem.freeLimit);
+                    
+                    // Calcular extra
+                    extra += paidStandardCount * 3.00; // Valor fixo de excedente padrão
+                    extra += premiumItems.reduce((sum, i) => sum + i.price, 0); // Premium sempre paga full
+                    
+                } else {
+                    // Lógica normal (soma tudo)
+                    inputs.forEach(input => {
+                        extra += parseFloat(input.dataset.price);
+                    });
+                }
+
+                const total = this.state.tempItem.basePrice + extra;
+                document.getElementById('btn-total-preview').innerText = this.formatMoney(total);
+            },
+
+            confirmOrder: function() {
+                // Recalcular para garantir integridade
+                const inputs = document.querySelectorAll('#options-container input:checked');
+                const selectedNames = [];
+                let extra = 0;
+                
+                 if (this.state.tempItem.type === 'acai' && this.state.tempItem.freeLimit > 0) {
+                    const selected = [];
+                    inputs.forEach(input => {
+                        selected.push({ price: parseFloat(input.dataset.price), name: input.dataset.name });
+                        selectedNames.push(input.dataset.name);
+                    });
+
+                    const standardItems = selected.filter(i => i.price <= 3.00);
+                    const premiumItems = selected.filter(i => i.price > 3.00);
+                    
+                    const paidStandardCount = Math.max(0, standardItems.length - this.state.tempItem.freeLimit);
+                    extra += paidStandardCount * 3.00;
+                    extra += premiumItems.reduce((sum, i) => sum + i.price, 0);
+                 } else {
+                    inputs.forEach(input => {
+                        selectedNames.push(input.dataset.name);
+                        extra += parseFloat(input.dataset.price);
+                    });
+                 }
+
+                // Adicionar ao carrinho
+                this.state.cart.push({
+                    ...this.state.tempItem,
+                    extraPrice: extra,
+                    totalPrice: this.state.tempItem.basePrice + extra,
+                    complements: selectedNames
+                });
+
+                this.showToast('Item adicionado! 😋');
+                this.updateCartUI();
+                
+                const returnView = this.state.tempItem.type === 'acai' ? 'acai-view' : 'lanches-view';
+                this.navigateTo(returnView);
+            },
+
+            // Carrinho
+            removeItem: function(id) {
+                this.state.cart = this.state.cart.filter(item => item.id !== id);
+                this.updateCartUI();
+            },
+
+            clearCart: function() {
+                if(confirm('Tem certeza que deseja esvaziar o carrinho?')) {
+                    this.state.cart = [];
+                    this.updateCartUI();
+                }
+            },
+
+            setDeliveryMethod: function(method) {
+                this.state.deliveryMethod = method;
+                const btnDelivery = document.getElementById('btn-delivery');
+                const btnPickup = document.getElementById('btn-pickup');
+                const addressContainer = document.getElementById('address-container');
+
+                if (method === 'entrega') {
+                    btnDelivery.className = "flex-1 py-3 rounded-lg font-bold text-sm transition-all duration-300 bg-purple-600 shadow-lg text-white";
+                    btnPickup.className = "flex-1 py-3 rounded-lg font-bold text-sm transition-all duration-300 text-white/50 hover:text-white";
+                    addressContainer.classList.remove('hidden');
+                } else {
+                    btnPickup.className = "flex-1 py-3 rounded-lg font-bold text-sm transition-all duration-300 bg-purple-600 shadow-lg text-white";
+                    btnDelivery.className = "flex-1 py-3 rounded-lg font-bold text-sm transition-all duration-300 text-white/50 hover:text-white";
+                    addressContainer.classList.add('hidden');
+                }
+            },
+
+            updateCartUI: function() {
+                // Bottom Bar Updates
+                const total = this.state.cart.reduce((acc, item) => acc + item.totalPrice, 0);
+                const count = this.state.cart.length;
+
+                document.getElementById('bar-count').innerText = count;
+                document.getElementById('bar-total').innerText = this.formatMoney(total);
+                
+                // Cart View Updates
+                const container = document.getElementById('cart-items');
+                const emptyMsg = document.getElementById('cart-empty-msg');
+                const actionsSection = document.getElementById('cart-total-section');
+                const deliverySection = document.getElementById('delivery-section');
+
+                container.innerHTML = '';
+
+                if (count === 0) {
+                    emptyMsg.classList.remove('hidden');
+                    emptyMsg.classList.add('flex');
+                    actionsSection.classList.add('hidden');
+                    deliverySection.classList.add('hidden');
+                } else {
+                    emptyMsg.classList.add('hidden');
+                    emptyMsg.classList.remove('flex');
+                    actionsSection.classList.remove('hidden');
+                    deliverySection.classList.remove('hidden');
+
+                    this.state.cart.forEach(item => {
+                        const div = document.createElement('div');
+                        div.className = 'glass p-4 rounded-2xl flex justify-between items-start animate-fade-in';
+                        div.innerHTML = `
+                            <div class="flex-1 pr-2">
+                                <h4 class="font-bold text-base text-purple-100">${item.name}</h4>
+                                <p class="text-[11px] text-purple-200/60 mt-1 leading-relaxed">
+                                    ${item.complements.length > 0 ? '+ ' + item.complements.join(', ') : 'Sem adicionais'}
+                                </p>
+                                <span class="text-green-400 font-bold text-sm block mt-2">${this.formatMoney(item.totalPrice)}</span>
+                            </div>
+                            <button onclick="app.removeItem(${item.id})" class="p-2 text-red-400/70 hover:text-red-400 hover:bg-red-400/10 rounded-lg transition-colors" aria-label="Remover item">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" /></svg>
+                            </button>
+                        `;
+                        container.appendChild(div);
+                    });
+                }
+                
+                document.getElementById('cart-total').innerText = this.formatMoney(total);
+                this.toggleBottomBar(this.state.currentView !== 'cart-view' && this.state.currentView !== 'complementos-view' && count > 0);
+            },
+
+            // Utils
+            toggleBottomBar: function(show) {
+                const bar = document.getElementById('cart-bottom-bar');
+                if (show && this.state.cart.length > 0) {
+                    bar.classList.remove('translate-y-[120%]');
+                } else {
+                    bar.classList.add('translate-y-[120%]');
+                }
+            },
+
+            formatMoney: function(value) {
+                return value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+            },
+
+            showToast: function(message) {
+                const toast = document.getElementById('toast');
+                document.getElementById('toast-msg').innerText = message;
+                toast.classList.remove('opacity-0', 'translate-y-[-20px]');
+                setTimeout(() => {
+                    toast.classList.add('opacity-0', 'translate-y-[-20px]');
+                }, 2500);
+            },
+
+            sendWhatsAppOrder: function() {
+                if (this.state.cart.length === 0) return;
+
+                const addressInput = document.getElementById('user-address');
+                const address = addressInput.value.trim();
+
+                if (this.state.deliveryMethod === 'entrega' && !address) {
+                    this.showToast('Digite o endereço! 🏠');
+                    addressInput.focus();
+                    addressInput.classList.add('border-red-500');
+                    setTimeout(() => addressInput.classList.remove('border-red-500'), 2000);
+                    return;
+                }
+
+                let msg = `*👑 NOVO PEDIDO - REI DO AÇAÍ* 👑\n\n`;
+                
+                // Itens
+                this.state.cart.forEach((item, i) => {
+                    msg += `*${i+1}. ${item.name}*\n`;
+                    if(item.complements.length > 0) msg += `   └ _${item.complements.join(', ')}_\n`;
+                    msg += `   💰 ${this.formatMoney(item.totalPrice)}\n\n`;
+                });
+                
+                // Totais e Info
+                const total = this.state.cart.reduce((acc, item) => acc + item.totalPrice, 0);
+                msg += `━━━━━━━━━━━━━━━━━━━\n`;
+                msg += `*TOTAL: ${this.formatMoney(total)}*\n`;
+                msg += `━━━━━━━━━━━━━━━━━━━\n\n`;
+                
+                // Entrega
+                if (this.state.deliveryMethod === 'entrega') {
+                    msg += `🛵 *ENTREGA (Delivery)*\n`;
+                    msg += `📍 ${address}\n`;
+                } else {
+                    msg += `🏪 *RETIRADA NO BALCÃO*\n`;
+                }
+
+                // Envio
+                const whatsappNumber = "5181621572";
+                const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`;
+                window.open(url, '_blank');
             }
-            window.scrollTo(0, 0);
-        }
+        };
 
-        function goBackFromCart() {
-            if (currentType) showCategory(currentType);
-            else showHome();
-        }
-
-        function removeItem(id) {
-            cart = cart.filter(item => item.id !== id);
-            showCart();
-            updateCartUI();
-        }
-
-        function clearCart() {
-            cart = [];
-            showCart();
-            updateCartUI();
-        }
-
-        function showToast(msg) {
-            const toast = document.createElement('div');
-            toast.className = 'fixed top-10 bg-purple-600 text-white px-6 py-3 rounded-full shadow-2xl animate-bounce z-[60] font-bold';
-            toast.innerText = msg;
-            document.body.appendChild(toast);
-            setTimeout(() => toast.remove(), 2500);
-        }
-
-        function sendWhatsAppOrder() {
-            if (cart.length === 0) return;
-            let total = 0;
-            let msg = `*👑 REI DO AÇAÍ* \n\n`;
-            cart.forEach((item, i) => {
-                total += item.totalPrice;
-                msg += `*${i+1}. ${item.name}* (R$ ${item.totalPrice.toFixed(2)})\n`;
-                if(item.complements.length > 0) msg += `_Adic: ${item.complements.join(', ')}_\n`;
-                msg += `\n`;
-            });
-            msg += `*TOTAL: R$ ${total.toFixed(2)}*`;
-            window.open(`https://wa.me/5511999999999?text=${encodeURIComponent(msg)}`, '_blank');
-        }
+        // Iniciar
+        app.init();
     </script>
-    
 </body>
 </html>
