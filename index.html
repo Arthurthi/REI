@@ -86,7 +86,7 @@
                 <div class="glass p-4 rounded-2xl flex items-center justify-between">
                     <div class="flex items-center gap-4">
                         <div class="w-14 h-14 bg-purple-800 rounded-xl flex items-center justify-center text-2xl shadow-lg">🥤</div>
-                        <div><h3 class="font-bold">Copo 300ml</h3><span class="text-green-400 font-bold block">R$ 8,00</span></div>
+                        <div><h3 class="font-bold">Copo 300ml</h3><span class="text-green-400 font-bold block">R$ 8,00</span><br><span>2 complementos Gratis</span></div>
                     </div>
                     <button onclick="app.openComplements('Açaí 300ml', 'acai', 8)" class="bg-purple-600 w-10 h-10 rounded-full hover:bg-purple-500 shadow-lg flex items-center justify-center font-bold text-xl transition-colors">+</button>
                 </div>
@@ -95,7 +95,7 @@
                 <div class="glass p-4 rounded-2xl flex items-center justify-between">
                     <div class="flex items-center gap-4">
                         <div class="w-14 h-14 bg-purple-800 rounded-xl flex items-center justify-center text-2xl shadow-lg">🥤</div>
-                        <div><h3 class="font-bold">Copo 400ml</h3><span class="text-green-400 font-bold block">R$ 10,00</span></div>
+                        <div><h3 class="font-bold">Copo 400ml</h3><span class="text-green-400 font-bold block">R$ 10,00</span><br><span>3 complementos Gratis</span></div>
                     </div>
                     <button onclick="app.openComplements('Açaí 400ml', 'acai', 10)" class="bg-purple-600 w-10 h-10 rounded-full hover:bg-purple-500 shadow-lg flex items-center justify-center font-bold text-xl transition-colors">+</button>
                 </div>
@@ -108,7 +108,7 @@
                             <span class="absolute -top-2 -right-2 bg-red-500 text-[9px] font-bold px-1.5 py-0.5 rounded-full animate-bounce shadow-sm">TOP</span>
                             🥤
                         </div>
-                        <div><h3 class="font-bold text-lg">Copo 500ml</h3><span class="text-green-400 font-bold block">R$ 12,00</span></div>
+                        <div><h3 class="font-bold text-lg">Copo 500ml</h3><span class="text-green-400 font-bold block">R$ 12,00</span><br><span>4 complementos Gratis</span></span></div>
                     </div>
                     <button onclick="app.openComplements('Açaí 500ml', 'acai', 12)" class="bg-purple-600 w-10 h-10 rounded-full hover:bg-purple-500 shadow-lg flex items-center justify-center font-bold text-xl transition-colors relative z-10">+</button>
                 </div>
@@ -116,8 +116,8 @@
                 <!-- Copo 700ml -->
                 <div class="glass p-4 rounded-2xl flex items-center justify-between">
                     <div class="flex items-center gap-4">
-                        <div class="w-14 h-14 bg-purple-800 rounded-xl flex items-center justify-center text-3xl shadow-lg">🏺</div>
-                        <div><h3 class="font-bold">Copo 700ml</h3><span class="text-green-400 font-bold block">R$ 24,00</span></div>
+                        <div class="w-14 h-14 bg-purple-800 rounded-xl flex items-center justify-center text-3xl shadow-lg">🥤</div>
+                        <div><h3 class="font-bold">Copo 700ml</h3><span class="text-green-400 font-bold block">R$ 24,00</span><br><span>4 complementos Gratis</span></div>
                     </div>
                     <button onclick="app.openComplements('Açaí 700ml', 'acai', 24)" class="bg-purple-600 w-10 h-10 rounded-full hover:bg-purple-500 shadow-lg flex items-center justify-center font-bold text-xl transition-colors">+</button>
                 </div>
@@ -146,11 +146,12 @@
                     <button onclick="app.openComplements('Cachorro-Quente', 'lanche', 10)" class="bg-pink-600 w-10 h-10 rounded-full hover:bg-pink-500 flex items-center justify-center font-bold text-xl shadow-lg transition-colors">+</button>
                 </div>
 
+                <!-- NOVO ITEM ADICIONADO -->
                 <div class="glass p-4 rounded-2xl flex items-center justify-between hover:border-pink-400 transition-colors">
                     <div class="flex items-center gap-4">
                         <div class="w-14 h-14 bg-pink-900/50 rounded-xl flex items-center justify-center text-2xl">🌭</div>
                         <div>
-                            <h3 class="font-bold leading-tight">Cachorro-Quente Duplo</h3>
+                            <h3 class="font-bold leading-tight">Cachorro-Quente<br><span class="text-yellow-400">Duplo</span></h3>
                             <span class="text-green-400 font-bold block mt-1">R$ 15,00</span>
                             <span class="text-gray-300 font-bold block mt-1 text-xs">2 Salsichas, alface, maionese molho, milho, ervilha e batata palha</span>
                         </div>
@@ -406,9 +407,8 @@
                     div.className = 'glass p-4 rounded-xl flex items-center justify-between cursor-pointer hover:bg-white/5 transition-all select-none';
                     
                     let priceText = '';
-                    if (type === 'acai' && opt.price <= 3.00) {
-                        priceText = 'Grátis*'; 
-                    } else if (opt.price === 0) {
+                    // Visualmente mostra o preço se existir, removendo o "Grátis*" visual pedido
+                    if (opt.price === 0) {
                         priceText = 'Grátis';
                     } else {
                         priceText = '+ ' + this.formatMoney(opt.price);
@@ -441,12 +441,7 @@
                     container.appendChild(div);
                 });
 
-                if(type === 'acai') {
-                     const obs = document.createElement('div');
-                     obs.className = "text-[10px] text-purple-300/50 italic px-2 pt-1";
-                     obs.innerText = "* Itens padrão excedentes custam R$ 3,00 cada.";
-                     container.appendChild(obs);
-                }
+                // Footnote removido conforme pedido para limpar a interface visual
 
                 this.updateTempItemTotal();
                 this.navigateTo('complementos-view');
@@ -662,7 +657,7 @@
                     msg += `⏰ Pronto em: 20-40 min\n`;
                 }
 
-                const whatsappNumber = "555185986007";
+                const whatsappNumber = "5181621572";
                 const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`;
                 window.open(url, '_blank');
             }
