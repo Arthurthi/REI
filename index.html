@@ -137,18 +137,22 @@
                 <div class="glass p-4 rounded-2xl flex items-center justify-between hover:border-pink-400 transition-colors">
                     <div class="flex items-center gap-4">
                         <div class="w-14 h-14 bg-pink-900/50 rounded-xl flex items-center justify-center text-2xl">🌭</div>
-                        <div><h3 class="font-bold">Cachorro-Quente</h3><span class="text-green-400 font-bold block">R$ 10,00</span></div>
+                        <div>
+                            <h3 class="font-bold leading-tight">Cachorro-Quente</h3>
+                            <span class="text-green-400 font-bold block mt-1">R$ 12,00</span>
+                            <span class="text-gray-300 font-bold block mt-1 text-xs"> Salsicha, alface, maionese molho, milho, ervilha e batata palha</span>
+                        </div>
                     </div>
                     <button onclick="app.openComplements('Cachorro-Quente', 'lanche', 10)" class="bg-pink-600 w-10 h-10 rounded-full hover:bg-pink-500 flex items-center justify-center font-bold text-xl shadow-lg transition-colors">+</button>
                 </div>
 
-                <!-- NOVO ITEM ADICIONADO -->
                 <div class="glass p-4 rounded-2xl flex items-center justify-between hover:border-pink-400 transition-colors">
                     <div class="flex items-center gap-4">
                         <div class="w-14 h-14 bg-pink-900/50 rounded-xl flex items-center justify-center text-2xl">🌭</div>
                         <div>
-                            <h3 class="font-bold leading-tight">Cachorro-Quente<br><span class="text-yellow-400">Duplo</span></h3>
+                            <h3 class="font-bold leading-tight">Cachorro-Quente Duplo</h3>
                             <span class="text-green-400 font-bold block mt-1">R$ 15,00</span>
+                            <span class="text-gray-300 font-bold block mt-1 text-xs">2 Salsichas, alface, maionese molho, milho, ervilha e batata palha</span>
                         </div>
                     </div>
                     <button onclick="app.openComplements('Cachorro-Quente Duplo', 'lanche', 15)" class="bg-pink-600 w-10 h-10 rounded-full hover:bg-pink-500 flex items-center justify-center font-bold text-xl shadow-lg transition-colors">+</button>
@@ -157,16 +161,23 @@
                 <div class="glass p-4 rounded-2xl flex items-center justify-between hover:border-pink-400 transition-colors">
                     <div class="flex items-center gap-4">
                         <div class="w-14 h-14 bg-pink-900/50 rounded-xl flex items-center justify-center text-2xl">🍔</div>
-                        <div><h3 class="font-bold">X-Salada</h3><span class="text-green-400 font-bold block">R$ 16,00</span></div>
+                        <div>
+                            <h3 class="font-bold leading-tight">X-Salada</h3>
+                            <span class="text-green-400 font-bold block mt-1">R$ 16,00</span>
+                            <span class="text-gray-300 font-bold block mt-1 text-xs">Bife, alface, tomate maionese, molho, ovo, milho, ervilha, presunto e queijo</span>
+                        </div>
                     </div>
                     <button onclick="app.openComplements('X-Salada', 'lanche', 16)" class="bg-pink-600 w-10 h-10 rounded-full hover:bg-pink-500 flex items-center justify-center font-bold text-xl shadow-lg transition-colors">+</button>
                 </div>
 
-                <div class="glass p-4 rounded-2xl flex items-center justify-between border border-pink-500/40 relative overflow-hidden">
-                    <div class="absolute -right-8 -top-8 w-24 h-24 bg-pink-500/20 rounded-full blur-xl"></div>
-                    <div class="flex items-center gap-4 relative z-10">
-                        <div class="w-14 h-14 bg-pink-900/50 rounded-xl flex items-center justify-center text-2xl text-yellow-400">🔥</div>
-                        <div><h3 class="font-bold">X-Calabresa</h3><span class="text-green-400 font-bold block">R$ 20,00</span></div>
+                <div class="glass p-4 rounded-2xl flex items-center justify-between hover:border-pink-400 transition-colors">
+                    <div class="flex items-center gap-4">
+                        <div class="w-14 h-14 bg-pink-900/50 rounded-xl flex items-center justify-center text-2xl">🍔</div>
+                        <div>
+                            <h3 class="font-bold leading-tight">X-Calabresa</h3>
+                            <span class="text-green-400 font-bold block mt-1">R$ 20,00</span>
+                            <span class="text-gray-300 font-bold block mt-1 text-xs">Calabresa , alface, tomate, maionese, molho, ovo, milho, ervilha, presunto e queijo</span>
+                        </div>
                     </div>
                     <button onclick="app.openComplements('X-Calabresa', 'lanche', 20)" class="bg-pink-600 w-10 h-10 rounded-full hover:bg-pink-500 flex items-center justify-center font-bold text-xl shadow-lg transition-colors relative z-10">+</button>
                 </div>
@@ -324,8 +335,6 @@
                         { name: 'Oreo', price: 3.00 }, { name: 'Chocoball', price: 3.00 }, { name: 'Confete', price: 3.00 }
                     ],
                     lanche: [
-                        { name: 'Ovo Extra', price: 2.00 }, { name: 'Bacon Extra', price: 4.00 },
-                        { name: 'Hambúrguer Extra', price: 6.00 }, { name: 'Cheddar', price: 3.00 },
                         { name: 'Maionese Caseira', price: 0 }
                     ]
                 }
