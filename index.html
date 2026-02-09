@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rei do Açai - Cardápio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .bg-glow {
+            background: radial-gradient(circle at center, #581c87 0%, #1e1b4b 100%);
+        }
+        .glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        /* Custom scrollbar for better mobile feel */
+        ::-webkit-scrollbar {
+            width: 5px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.1);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-glow min-h-screen text-white flex flex-col items-center">
+
+    <main class="w-full max-w-md px-6 py-12 flex flex-col items-center">
+        
+        <!-- VISTA PRINCIPAL (HOME) -->
+        <div id="home-view" class="w-full flex flex-col items-center space-y-8">
+            <!-- LOGO COM ANIMAÇÃO -->
+            <div class="relative">
+                <div class="absolute inset-0 bg-purple-500 blur-2xl opacity-20 rounded-full animate-pulse"></div>
+                <div class="relative p-1 bg-gradient-to-tr from-purple-400 to-fuchsia-600 rounded-full shadow-2xl">
+                    <img src="WhatsApp Image 2026-02-09 at 14.28.35.jpeg" 
+                         alt="Logo Rei do Açai" 
+                         class="w-40 h-40 rounded-full object-cover border-4 border-purple-950 shadow-inner"
+                         onerror="this.src='https://via.placeholder.com/160?text=Açai'">
+                </div>
+            </div>
+
+            <div class="text-center space-y-2">
+                <h1 class="text-4xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-200 to-fuchsia-400">
+                    Rei do Açai
+                </h1>
+                <p class="text-purple-200/70 font-medium text-lg">O melhor sabor da região 👑</p>
+            </div>
+
+            <div class="flex items-center gap-2 bg-green-500/10 border border-green-500/20 px-4 py-1 rounded-full">
+                <span class="w-2 h-2 bg-green-500 rounded-full animate-ping"></span>
+                <span class="text-green-400 text-sm font-semibold">Aberto agora</span>
+            </div>
+
+            <h2 class="text-xl font-semibold pt-4">Faça seu pedido!</h2>
+
+            <div class="w-full flex flex-col gap-4">
+                <button onclick="showCategory('acai')" class="group relative w-full overflow-hidden rounded-2xl bg-gradient-to-r from-purple-600 to-purple-800 p-[2px] transition-all hover:scale-[1.02] active:scale-95 shadow-lg shadow-purple-900/20">
+                    <div class="flex items-center justify-between bg-purple-900/90 rounded-[14px] px-8 py-5 transition-all group-hover:bg-transparent">
+                        <div class="flex flex-col items-start">
+                            <span class="text-xl font-bold">Açaí</span>
+                            <span class="text-xs text-purple-300 opacity-70">Monte do seu jeito</span>
+                        </div>
+                        <span class="text-2xl">🍧</span>
+                    </div>
+                </button>
+
+                <button onclick="showCategory('lanches')" class="group relative w-full overflow-hidden rounded-2xl bg-gradient-to-r from-fuchsia-600 to-pink-700 p-[2px] transition-all hover:scale-[1.02] active:scale-95 shadow-lg shadow-pink-900/20">
+                    <div class="flex items-center justify-between bg-purple-950/90 rounded-[14px] px-8 py-5 transition-all group-hover:bg-transparent">
+                        <div class="flex flex-col items-start">
+                            <span class="text-xl font-bold">Lanches</span>
+                            <span class="text-xs text-fuchsia-300 opacity-70">Artesanais e suculentos</span>
+                        </div>
+                        <span class="text-2xl">🍔</span>
+                    </div>
+                </button>
+            </div>
+        </div>
+
+        <!-- VISTA CARDÁPIO AÇAÍ -->
+        <div id="acai-view" class="hidden w-full flex flex-col space-y-6">
+            <div class="flex items-center gap-4">
+                <button onclick="showHome()" class="p-2 bg-purple-800/50 rounded-full hover:bg-purple-700 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                <h2 class="text-2xl font-bold italic">Tamanhos de Açaí:</h2>
+            </div>
+
+            <div class="grid grid-cols-1 gap-4">
+                <div class="glass p-4 rounded-2xl flex items-center justify-between group hover:border-purple-400 transition-all">
+                    <div class="flex items-center gap-4">
+                        <div class="w-16 h-16 bg-purple-800 rounded-xl flex items-center justify-center text-2xl shadow-lg">🥤</div>
+                        <div>
+                            <h3 class="font-bold text-lg">Copo 300ml</h3>
+                            <p class="text-sm text-purple-300">Lanche rápido</p>
+                            <span class="text-green-400 font-bold mt-1 block">R$ 8,00</span>
+                        </div>
+                    </div>
+                    <button onclick="openComplementos('Açaí 300ml', 'acai')" class="bg-purple-600 p-2 rounded-lg hover:bg-purple-500 shadow-lg">+</button>
+                </div>
+
+                <div class="glass p-4 rounded-2xl flex items-center justify-between group hover:border-purple-400 transition-all">
+                    <div class="flex items-center gap-4">
+                        <div class="w-16 h-16 bg-purple-800 rounded-xl flex items-center justify-center text-2xl shadow-lg">🥤</div>
+                        <div>
+                            <h3 class="font-bold text-lg">Copo 400ml</h3>
+                            <p class="text-sm text-purple-300">Equilíbrio perfeito</p>
+                            <span class="text-green-400 font-bold mt-1 block">R$ 10,00</span>
+                        </div>
+                    </div>
+                    <button onclick="openComplementos('Açaí 400ml', 'acai')" class="bg-purple-600 p-2 rounded-lg hover:bg-purple-500 shadow-lg">+</button>
+                </div>
+
+                <div class="glass p-4 rounded-2xl flex items-center justify-between group hover:border-purple-400 transition-all border border-purple-500/30">
+                    <div class="flex items-center gap-4">
+                        <div class="w-16 h-16 bg-purple-800 rounded-xl flex items-center justify-center text-2xl shadow-lg relative">
+                            <span class="absolute -top-2 -right-2 bg-red-500 text-[10px] px-2 py-1 rounded-full animate-bounce text-white">TOP</span>
+                            🥤
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg">Copo 500ml</h3>
+                            <p class="text-sm text-purple-300">O mais pedido!</p>
+                            <span class="text-green-400 font-bold mt-1 block">R$ 12,00</span>
+                        </div>
+                    </div>
+                    <button onclick="openComplementos('Açaí 500ml', 'acai')" class="bg-purple-600 p-2 rounded-lg hover:bg-purple-500 shadow-lg">+</button>
+                </div>
+
+                <div class="glass p-4 rounded-2xl flex items-center justify-between group hover:border-purple-400 transition-all">
+                    <div class="flex items-center gap-4">
+                        <div class="w-16 h-16 bg-purple-800 rounded-xl flex items-center justify-center text-3xl shadow-lg">🏺</div>
+                        <div>
+                            <h3 class="font-bold text-lg">Copo 700ml</h3>
+                            <p class="text-sm text-purple-300">O Rei dos Copos</p>
+                            <span class="text-green-400 font-bold mt-1 block">R$ 24,00</span>
+                        </div>
+                    </div>
+                    <button onclick="openComplementos('Açaí 700ml', 'acai')" class="bg-purple-600 p-2 rounded-lg hover:bg-purple-500 shadow-lg">+</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- VISTA CARDÁPIO LANCHES -->
+        <div id="lanches-view" class="hidden w-full flex flex-col space-y-6">
+            <div class="flex items-center gap-4">
+                <button onclick="showHome()" class="p-2 bg-pink-800/50 rounded-full hover:bg-pink-700 transition-colors text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                <h2 class="text-2xl font-bold italic">Nossos Lanches:</h2>
+            </div>
+
+            <div class="grid grid-cols-1 gap-4">
+                <div class="glass p-4 rounded-2xl flex items-center justify-between group hover:border-pink-400 transition-all">
+                    <div class="flex items-center gap-4">
+                        <div class="w-16 h-16 bg-pink-900/50 rounded-xl flex items-center justify-center text-3xl shadow-lg">🍔</div>
+                        <div>
+                            <h3 class="font-bold text-lg">X-Burguer</h3>
+                            <p class="text-xs text-pink-200/70 italic">Hambúrguer, queijo e molho</p>
+                            <span class="text-green-400 font-bold mt-1 block">R$ 15,00</span>
+                        </div>
+                    </div>
+                    <button onclick="openComplementos('X-Burguer', 'lanche')" class="bg-pink-600 p-2 rounded-lg hover:bg-pink-500 shadow-lg">+</button>
+                </div>
+
+                <div class="glass p-4 rounded-2xl flex items-center justify-between group hover:border-pink-400 transition-all">
+                    <div class="flex items-center gap-4">
+                        <div class="w-16 h-16 bg-pink-900/50 rounded-xl flex items-center justify-center text-3xl shadow-lg">🥗</div>
+                        <div>
+                            <h3 class="font-bold text-lg">X-Salada</h3>
+                            <p class="text-xs text-pink-200/70 italic">Alface, tomate, milho e ovo</p>
+                            <span class="text-green-400 font-bold mt-1 block">R$ 19,00</span>
+                        </div>
+                    </div>
+                    <button onclick="openComplementos('X-Salada', 'lanche')" class="bg-pink-600 p-2 rounded-lg hover:bg-pink-500 shadow-lg">+</button>
+                </div>
+
+                <div class="glass p-4 rounded-2xl flex items-center justify-between group hover:border-pink-400 transition-all border border-pink-500/30">
+                    <div class="flex items-center gap-4">
+                        <div class="w-16 h-16 bg-pink-900/50 rounded-xl flex items-center justify-center text-3xl shadow-lg relative">
+                            <span class="absolute -top-2 -right-2 bg-yellow-500 text-[9px] font-bold px-2 py-1 rounded-full text-black">MONSTRO</span>
+                            🍔
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg">X-Tudo</h3>
+                            <p class="text-xs text-pink-200/70 italic">O Rei da Fome: Completo!</p>
+                            <span class="text-green-400 font-bold mt-1 block">R$ 26,00</span>
+                        </div>
+                    </div>
+                    <button onclick="openComplementos('X-Tudo', 'lanche')" class="bg-pink-600 p-2 rounded-lg hover:bg-pink-500 shadow-lg">+</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- VISTA COMPLEMENTOS (NOVA) -->
+        <div id="complementos-view" class="hidden w-full flex flex-col space-y-6">
+            <div class="flex items-center gap-4">
+                <button id="btn-back-complementos" class="p-2 bg-white/10 rounded-full hover:bg-white/20 transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                <div>
+                    <h2 id="complemento-title" class="text-2xl font-bold italic">Personalizar</h2>
+                    <p class="text-xs text-purple-300 italic">Escolha seus favoritos</p>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <h3 class="text-sm font-semibold uppercase tracking-wider text-purple-400">Adicionais:</h3>
+                
+                <div id="options-container" class="grid grid-cols-1 gap-3">
+                    <!-- Opções serão inseridas via JavaScript -->
+                </div>
+            </div>
+
+            <div class="pt-6">
+                <button onclick="confirmOrder()" class="w-full bg-gradient-to-r from-green-500 to-emerald-700 py-4 rounded-2xl font-bold shadow-lg shadow-green-900/20 hover:scale-[1.02] active:scale-95 transition-all">
+                    Confirmar e Adicionar
+                </button>
+            </div>
+        </div>
+
+        <!-- RODAPÉ -->
+        <footer class="pt-12 flex flex-col items-center gap-4 opacity-60 mt-auto">
+            <div class="flex gap-6 text-sm">
+                <a href="#" class="hover:text-purple-400 transition-colors underline decoration-purple-500/30">Instagram</a>
+                <a href="#" class="hover:text-purple-400 transition-colors underline decoration-purple-500/30">WhatsApp</a>
+            </div>
+            <p class="text-[10px] uppercase tracking-[0.2em] text-center">© 2024 Rei do Açai • Premium Quality</p>
+        </footer>
+
+    </main>
+
+    <script>
+        let currentType = ''; // Para saber se volta para 'acai' ou 'lanches'
+
+        const complementosData = {
+            acai: [
+                { name: 'Morango', price: 'Grátis' },
+                { name: 'Abacaxi', price: 'Grátis' },
+                { name: 'Banana', price: 'Grátis' },
+                { name: 'Manga', price: 'Grátis' },
+                { name: 'Mamão', price: 'Grátis' },
+                { name: 'Uva', price: 'Grátis' },
+                { name: 'Pasta de Amendoim', price: 'Grátis' },
+                { name: 'Sucrilhos', price: 'Grátis' },
+                { name: 'Leite em pó', price: 'Grátis' },
+                { name: 'Leite Condensado', price: 'Grátis' },
+                { name: 'Paçoca', price: 'Grátis' },
+                { name: 'Granola', price: 'Grátis' },
+                { name: 'Amendoim', price: 'Grátis' },
+                { name: 'Biscoito Oreo', price: 'Grátis' }
+            ],
+            lanche: [
+                { name: 'Ovo Extra', price: 'R$ 2,00' },
+                { name: 'Bacon Extra', price: 'R$ 4,00' },
+                { name: 'Hambúrguer Extra', price: 'R$ 6,00' },
+                { name: 'Maionese Caseira', price: 'Grátis' },
+                { name: 'Cheddar', price: 'R$ 3,00' }
+            ],
+        };
+
+        function showCategory(category) {
+            hideAllViews();
+            if(category === 'acai') {
+                document.getElementById('acai-view').classList.remove('hidden');
+            } else if(category === 'lanches') {
+                document.getElementById('lanches-view').classList.remove('hidden');
+            }
+            window.scrollTo(0, 0);
+        }
+
+        function showHome() {
+            hideAllViews();
+            document.getElementById('home-view').classList.remove('hidden');
+            window.scrollTo(0, 0);
+        }
+
+        function openComplementos(itemName, type) {
+            currentType = type;
+            hideAllViews();
+            document.getElementById('complementos-view').classList.remove('hidden');
+            document.getElementById('complemento-title').innerText = itemName;
+            
+            // Configura o botão de voltar da tela de complementos
+            document.getElementById('btn-back-complementos').onclick = () => showCategory(type === 'acai' ? 'acai' : 'lanches');
+
+            // Renderiza as opções
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+            
+            const options = complementosData[type];
+            options.forEach(opt => {
+                const div = document.createElement('div');
+                div.className = 'glass p-4 rounded-xl flex items-center justify-between cursor-pointer hover:bg-white/10 transition-all';
+                div.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <input type="checkbox" class="w-5 h-5 accent-purple-500 rounded border-none">
+                        <span class="font-medium">${opt.name}</span>
+                    </div>
+                    <span class="text-xs font-bold text-green-400">${opt.price}</span>
+                `;
+                div.onclick = (e) => {
+                    if(e.target.tagName !== 'INPUT') {
+                        const cb = div.querySelector('input');
+                        cb.checked = !cb.checked;
+                    }
+                };
+                container.appendChild(div);
+            });
+            
+            window.scrollTo(0, 0);
+        }
+
+        function hideAllViews() {
+            const views = ['home-view', 'acai-view', 'lanches-view', 'complementos-view'];
+            views.forEach(id => document.getElementById(id).classList.add('hidden'));
+        }
+
+        function confirmOrder() {
+            // Aqui futuramente você pode adicionar ao carrinho
+            showHome();
+            // Um pequeno feedback visual
+            const feedback = document.createElement('div');
+            feedback.className = 'fixed bottom-10 bg-green-600 text-white px-6 py-3 rounded-full shadow-2xl animate-bounce z-50';
+            feedback.innerText = 'Item adicionado com sucesso! ✅';
+            document.body.appendChild(feedback);
+            setTimeout(() => feedback.remove(), 3000);
+        }
+    </script>
+    
+</body>
+</html>
