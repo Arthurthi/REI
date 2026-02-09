@@ -18,7 +18,7 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
-        /* Custom scrollbar for better mobile feel */
+        /* Scrollbar suave */
         ::-webkit-scrollbar {
             width: 5px;
         }
@@ -31,13 +31,12 @@
         }
     </style>
 </head>
-<body class="bg-glow min-h-screen text-white flex flex-col items-center">
+<body class="bg-glow min-h-screen text-white flex flex-col items-center pb-24">
 
     <main class="w-full max-w-md px-6 py-12 flex flex-col items-center">
         
         <!-- VISTA PRINCIPAL (HOME) -->
         <div id="home-view" class="w-full flex flex-col items-center space-y-8">
-            <!-- LOGO COM ANIMAÇÃO -->
             <div class="relative">
                 <div class="absolute inset-0 bg-purple-500 blur-2xl opacity-20 rounded-full animate-pulse"></div>
                 <div class="relative p-1 bg-gradient-to-tr from-purple-400 to-fuchsia-600 rounded-full shadow-2xl">
@@ -93,59 +92,52 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                     </svg>
                 </button>
-                <h2 class="text-2xl font-bold italic">Tamanhos de Açaí:</h2>
+                <h2 class="text-2xl font-bold italic text-purple-200">Tamanhos de Açaí:</h2>
             </div>
 
             <div class="grid grid-cols-1 gap-4">
                 <div class="glass p-4 rounded-2xl flex items-center justify-between group hover:border-purple-400 transition-all">
                     <div class="flex items-center gap-4">
-                        <div class="w-16 h-16 bg-purple-800 rounded-xl flex items-center justify-center text-2xl shadow-lg">🥤</div>
+                        <div class="w-14 h-14 bg-purple-800 rounded-xl flex items-center justify-center text-2xl shadow-lg">🥤</div>
                         <div>
-                            <h3 class="font-bold text-lg">Copo 300ml</h3>
-                            <p class="text-sm text-purple-300">Lanche rápido</p>
-                            <span class="text-green-400 font-bold mt-1 block">R$ 8,00</span>
+                            <h3 class="font-bold">Copo 300ml</h3>
+                            <span class="text-green-400 font-bold block">R$ 8,00</span>
                         </div>
                     </div>
-                    <button onclick="openComplementos('Açaí 300ml', 'acai')" class="bg-purple-600 p-2 rounded-lg hover:bg-purple-500 shadow-lg">+</button>
+                    <button onclick="openComplementos('Açaí 300ml', 'acai', 8)" class="bg-purple-600 w-10 h-10 rounded-full hover:bg-purple-500 shadow-lg flex items-center justify-center font-bold text-xl">+</button>
                 </div>
-
                 <div class="glass p-4 rounded-2xl flex items-center justify-between group hover:border-purple-400 transition-all">
                     <div class="flex items-center gap-4">
-                        <div class="w-16 h-16 bg-purple-800 rounded-xl flex items-center justify-center text-2xl shadow-lg">🥤</div>
+                        <div class="w-14 h-14 bg-purple-800 rounded-xl flex items-center justify-center text-2xl shadow-lg">🥤</div>
                         <div>
-                            <h3 class="font-bold text-lg">Copo 400ml</h3>
-                            <p class="text-sm text-purple-300">Equilíbrio perfeito</p>
-                            <span class="text-green-400 font-bold mt-1 block">R$ 10,00</span>
+                            <h3 class="font-bold">Copo 400ml</h3>
+                            <span class="text-green-400 font-bold block">R$ 10,00</span>
                         </div>
                     </div>
-                    <button onclick="openComplementos('Açaí 400ml', 'acai')" class="bg-purple-600 p-2 rounded-lg hover:bg-purple-500 shadow-lg">+</button>
+                    <button onclick="openComplementos('Açaí 400ml', 'acai', 10)" class="bg-purple-600 w-10 h-10 rounded-full hover:bg-purple-500 shadow-lg flex items-center justify-center font-bold text-xl">+</button>
                 </div>
-
-                <div class="glass p-4 rounded-2xl flex items-center justify-between group hover:border-purple-400 transition-all border border-purple-500/30">
+                <div class="glass p-4 rounded-2xl flex items-center justify-between group border border-purple-500/30">
                     <div class="flex items-center gap-4">
-                        <div class="w-16 h-16 bg-purple-800 rounded-xl flex items-center justify-center text-2xl shadow-lg relative">
-                            <span class="absolute -top-2 -right-2 bg-red-500 text-[10px] px-2 py-1 rounded-full animate-bounce text-white">TOP</span>
+                        <div class="w-14 h-14 bg-purple-800 rounded-xl flex items-center justify-center text-2xl relative shadow-lg">
+                            <span class="absolute -top-2 -right-2 bg-red-500 text-[8px] px-1.5 py-0.5 rounded-full animate-bounce">TOP</span>
                             🥤
                         </div>
                         <div>
                             <h3 class="font-bold text-lg">Copo 500ml</h3>
-                            <p class="text-sm text-purple-300">O mais pedido!</p>
-                            <span class="text-green-400 font-bold mt-1 block">R$ 12,00</span>
+                            <span class="text-green-400 font-bold block">R$ 12,00</span>
                         </div>
                     </div>
-                    <button onclick="openComplementos('Açaí 500ml', 'acai')" class="bg-purple-600 p-2 rounded-lg hover:bg-purple-500 shadow-lg">+</button>
+                    <button onclick="openComplementos('Açaí 500ml', 'acai', 12)" class="bg-purple-600 w-10 h-10 rounded-full hover:bg-purple-500 shadow-lg flex items-center justify-center font-bold text-xl">+</button>
                 </div>
-
                 <div class="glass p-4 rounded-2xl flex items-center justify-between group hover:border-purple-400 transition-all">
                     <div class="flex items-center gap-4">
-                        <div class="w-16 h-16 bg-purple-800 rounded-xl flex items-center justify-center text-3xl shadow-lg">🏺</div>
+                        <div class="w-14 h-14 bg-purple-800 rounded-xl flex items-center justify-center text-2xl shadow-lg">🏺</div>
                         <div>
-                            <h3 class="font-bold text-lg">Copo 700ml</h3>
-                            <p class="text-sm text-purple-300">O Rei dos Copos</p>
-                            <span class="text-green-400 font-bold mt-1 block">R$ 24,00</span>
+                            <h3 class="font-bold">Copo 700ml</h3>
+                            <span class="text-green-400 font-bold block">R$ 24,00</span>
                         </div>
                     </div>
-                    <button onclick="openComplementos('Açaí 700ml', 'acai')" class="bg-purple-600 p-2 rounded-lg hover:bg-purple-500 shadow-lg">+</button>
+                    <button onclick="openComplementos('Açaí 700ml', 'acai', 24)" class="bg-purple-600 w-10 h-10 rounded-full hover:bg-purple-500 shadow-lg flex items-center justify-center font-bold text-xl">+</button>
                 </div>
             </div>
         </div>
@@ -158,120 +150,136 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                     </svg>
                 </button>
-                <h2 class="text-2xl font-bold italic">Nossos Lanches:</h2>
+                <h2 class="text-2xl font-bold italic text-pink-200">Nossos Lanches:</h2>
             </div>
 
             <div class="grid grid-cols-1 gap-4">
                 <div class="glass p-4 rounded-2xl flex items-center justify-between group hover:border-pink-400 transition-all">
                     <div class="flex items-center gap-4">
-                        <div class="w-16 h-16 bg-pink-900/50 rounded-xl flex items-center justify-center text-3xl shadow-lg">🍔</div>
+                        <div class="w-14 h-14 bg-pink-900/50 rounded-xl flex items-center justify-center text-2xl">🌭</div>
                         <div>
-                            <h3 class="font-bold text-lg">Cachorro-Quente</h3>
-                            <p class="text-xs text-pink-200/70 italic">Hambúrguer, queijo e molho</p>
-                            <span class="text-green-400 font-bold mt-1 block">R$ 15,00</span>
+                            <h3 class="font-bold">Cachorro-Quente</h3>
+                            <span class="text-green-400 font-bold block">R$ 10,00</span>
                         </div>
                     </div>
-                    <button onclick="openComplementos('X-Burguer', 'lanche')" class="bg-pink-600 p-2 rounded-lg hover:bg-pink-500 shadow-lg">+</button>
+                    <button onclick="openComplementos('Cachorro-Quente', 'lanche', 10)" class="bg-pink-600 w-10 h-10 rounded-full hover:bg-pink-500 flex items-center justify-center font-bold text-xl">+</button>
                 </div>
-
                 <div class="glass p-4 rounded-2xl flex items-center justify-between group hover:border-pink-400 transition-all">
                     <div class="flex items-center gap-4">
-                        <div class="w-16 h-16 bg-pink-900/50 rounded-xl flex items-center justify-center text-3xl shadow-lg">🥗</div>
+                        <div class="w-14 h-14 bg-pink-900/50 rounded-xl flex items-center justify-center text-2xl">🍔</div>
                         <div>
-                            <h3 class="font-bold text-lg">X-Salada</h3>
-                            <p class="text-xs text-pink-200/70 italic">Alface, tomate, milho e ovo</p>
-                            <span class="text-green-400 font-bold mt-1 block">R$ 19,00</span>
+                            <h3 class="font-bold">X-Salada</h3>
+                            <span class="text-green-400 font-bold block">R$ 16,00</span>
                         </div>
                     </div>
-                    <button onclick="openComplementos('X-Salada', 'lanche')" class="bg-pink-600 p-2 rounded-lg hover:bg-pink-500 shadow-lg">+</button>
+                    <button onclick="openComplementos('X-Salada', 'lanche', 16)" class="bg-pink-600 w-10 h-10 rounded-full hover:bg-pink-500 flex items-center justify-center font-bold text-xl">+</button>
                 </div>
-
-                <div class="glass p-4 rounded-2xl flex items-center justify-between group hover:border-pink-400 transition-all border border-pink-500/30">
+                <div class="glass p-4 rounded-2xl flex items-center justify-between group hover:border-pink-400 transition-all">
                     <div class="flex items-center gap-4">
-                        <div class="w-16 h-16 bg-pink-900/50 rounded-xl flex items-center justify-center text-3xl shadow-lg relative">
-                            <span class="absolute -top-2 -right-2 bg-yellow-500 text-[9px] font-bold px-2 py-1 rounded-full text-black">MONSTRO</span>
-                            🍔
-                        </div>
+                        <div class="w-14 h-14 bg-pink-900/50 rounded-xl flex items-center justify-center text-2xl text-yellow-400">🔥</div>
                         <div>
-                            <h3 class="font-bold text-lg">Cachorro-Quente</h3>
-                            <p class="text-xs text-pink-200/70 italic">O Rei da Fome: Completo!</p>
-                            <span class="text-green-400 font-bold mt-1 block">R$ 26,00</span>
+                            <h3 class="font-bold">X-Calabresa</h3>
+                            <span class="text-green-400 font-bold block">R$ 20,00</span>
                         </div>
                     </div>
-                    <button onclick="openComplementos('X-Tudo', 'lanche')" class="bg-pink-600 p-2 rounded-lg hover:bg-pink-500 shadow-lg">+</button>
+                    <button onclick="openComplementos('X-Calabresa', 'lanche', 20)" class="bg-pink-600 w-10 h-10 rounded-full hover:bg-pink-500 flex items-center justify-center font-bold text-xl">+</button>
                 </div>
             </div>
         </div>
 
-        <!-- VISTA COMPLEMENTOS (NOVA) -->
+        <!-- VISTA COMPLEMENTOS -->
         <div id="complementos-view" class="hidden w-full flex flex-col space-y-6">
             <div class="flex items-center gap-4">
-                <button id="btn-back-complementos" class="p-2 bg-white/10 rounded-full hover:bg-white/20 transition-colors">
+                <button id="btn-back-complementos" class="p-2 bg-white/10 rounded-full hover:bg-white/20">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                     </svg>
                 </button>
                 <div>
                     <h2 id="complemento-title" class="text-2xl font-bold italic">Personalizar</h2>
-                    <p class="text-xs text-purple-300 italic">Escolha seus favoritos</p>
+                    <p id="item-base-price" class="text-xs text-purple-300 italic">Preço base: R$ 0,00</p>
                 </div>
             </div>
 
-            <div class="space-y-4">
-                <h3 class="text-sm font-semibold uppercase tracking-wider text-purple-400">Adicionais:</h3>
-                
-                <div id="options-container" class="grid grid-cols-1 gap-3">
-                    <!-- Opções serão inseridas via JavaScript -->
+            <div class="space-y-4 max-h-[50vh] overflow-y-auto pr-2">
+                <h3 class="text-sm font-semibold uppercase tracking-wider text-purple-400">Escolha os Adicionais:</h3>
+                <div id="options-container" class="grid grid-cols-1 gap-2">
+                    <!-- Opções via JS -->
                 </div>
             </div>
 
-            <div class="pt-6">
-                <button onclick="confirmOrder()" class="w-full bg-gradient-to-r from-green-500 to-emerald-700 py-4 rounded-2xl font-bold shadow-lg shadow-green-900/20 hover:scale-[1.02] active:scale-95 transition-all">
-                    Confirmar e Adicionar
+            <div class="pt-4">
+                <button onclick="confirmOrder()" class="w-full bg-gradient-to-r from-green-500 to-emerald-700 py-4 rounded-2xl font-bold shadow-lg hover:scale-[1.02] active:scale-95 transition-all text-white">
+                    Confirmar e Continuar Comprando
                 </button>
             </div>
         </div>
 
-        <!-- RODAPÉ -->
-        <footer class="pt-12 flex flex-col items-center gap-4 opacity-60 mt-auto">
-            <div class="flex gap-6 text-sm">
-                <a href="#" class="hover:text-purple-400 transition-colors underline decoration-purple-500/30">Instagram</a>
-                <a href="#" class="hover:text-purple-400 transition-colors underline decoration-purple-500/30">WhatsApp</a>
+        <!-- VISTA CARRINHO (FULL SCREEN) -->
+        <div id="cart-view" class="hidden w-full flex flex-col space-y-6">
+            <div class="flex items-center gap-4">
+                <button onclick="goBackFromCart()" class="p-2 bg-white/10 rounded-full">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+                <h2 class="text-2xl font-bold italic">Meu Pedido</h2>
             </div>
+
+            <div id="cart-items" class="space-y-3">
+                <!-- Itens -->
+            </div>
+
+            <div id="cart-empty-msg" class="hidden py-10 text-center opacity-50">
+                <p>O carrinho ainda está vazio...</p>
+            </div>
+
+            <div id="cart-total-section" class="pt-6 border-t border-white/10 space-y-4">
+                <div class="flex justify-between items-center text-xl font-bold">
+                    <span>Subtotal:</span>
+                    <span id="cart-total" class="text-green-400">R$ 0,00</span>
+                </div>
+                <button onclick="sendWhatsAppOrder()" class="w-full bg-green-600 py-5 rounded-2xl font-bold flex items-center justify-center gap-3 shadow-xl">
+                    Finalizar Pedido no WhatsApp
+                </button>
+                <button onclick="clearCart()" class="w-full text-red-400 text-sm font-bold uppercase py-2">Esvaziar Carrinho</button>
+            </div>
+        </div>
+
+        <!-- RODAPÉ -->
+        <footer class="pt-12 flex flex-col items-center gap-4 opacity-40 mt-auto">
             <p class="text-[10px] uppercase tracking-[0.2em] text-center">© 2026 Rei do Açai • Premium Quality</p>
         </footer>
 
     </main>
 
+    <!-- BARRA FLUTUANTE ESTILO IFOOD -->
+    <div id="cart-bottom-bar" class="fixed bottom-0 left-0 w-full p-4 transform translate-y-full transition-transform duration-300 z-50">
+        <button onclick="showCart()" class="w-full max-w-md mx-auto bg-purple-600 hover:bg-purple-500 text-white flex items-center justify-between px-6 py-4 rounded-2xl shadow-2xl border border-purple-400/30">
+            <div class="flex items-center gap-3">
+                <div class="bg-purple-900/50 w-8 h-8 rounded-lg flex items-center justify-center font-bold text-sm" id="bar-count">1</div>
+                <span class="font-bold">Ver Carrinho</span>
+            </div>
+            <span class="font-bold text-lg" id="bar-total">R$ 0,00</span>
+        </button>
+    </div>
+
     <script>
-        let currentType = ''; // Para saber se volta para 'acai' ou 'lanches'
+        let currentType = '';
+        let currentItemName = '';
+        let currentItemPrice = 0;
+        let cart = [];
 
         const complementosData = {
             acai: [
-                { name: 'Morango', price: 'Grátis' },
-                { name: 'Abacaxi', price: 'Grátis' },
-                { name: 'Banana', price: 'Grátis' },
-                { name: 'Kiwi', price: 'Grátis' },
-                { name: 'Manga', price: 'Grátis' },
-                { name: 'Mamão', price: 'Grátis' },
-                { name: 'Uva', price: 'Grátis' },
-                { name: 'Pasta de Amendoim', price: 'Grátis' },
-                { name: 'Sucrilhos', price: 'Grátis' },
-                { name: 'Leite em pó', price: 'Grátis' },
-                { name: 'Leite Condensado', price: 'Grátis' },
-                { name: 'Paçoca', price: 'Grátis' },
-                { name: 'Granola', price: 'Grátis' },
-                { name: 'Amendoim', price: 'Grátis' },
-                { name: 'Biscoito Oreo', price: 'Grátis' },
-                { name: 'MMS', price: 'Grátis' },
-                { name: 'Chocoball', price: 'Grátis' },
+                { name: 'Morango', price: 0 }, { name: 'Abacaxi', price: 0 }, { name: 'Banana', price: 0 },
+                { name: 'Uva', price: 0 }, { name: 'Leite em pó', price: 0 }, { name: 'Leite Condensado', price: 0 },
+                { name: 'Granola', price: 0 }, { name: 'Paçoca', price: 0 }, { name: 'Nutella', price: 5.00 },
+                { name: 'Oreo', price: 0 }, { name: 'Chocoball', price: 0 }
             ],
             lanche: [
-                { name: 'Ovo Extra', price: 'R$ 2,00' },
-                { name: 'Bacon Extra', price: 'R$ 4,00' },
-                { name: 'Hambúrguer Extra', price: 'R$ 6,00' },
-                { name: 'Maionese Caseira', price: 'Grátis' },
-                { name: 'Cheddar', price: 'R$ 3,00' }
+                { name: 'Ovo Extra', price: 2 }, { name: 'Bacon Extra', price: 4 },
+                { name: 'Hambúrguer Extra', price: 6 }, { name: 'Cheddar', price: 3 }
             ],
         };
 
@@ -282,6 +290,7 @@
             } else if(category === 'lanches') {
                 document.getElementById('lanches-view').classList.remove('hidden');
             }
+            currentType = category;
             window.scrollTo(0, 0);
         }
 
@@ -291,56 +300,160 @@
             window.scrollTo(0, 0);
         }
 
-        function openComplementos(itemName, type) {
+        function openComplementos(itemName, type, basePrice) {
             currentType = type;
+            currentItemName = itemName;
+            currentItemPrice = basePrice;
+            
             hideAllViews();
             document.getElementById('complementos-view').classList.remove('hidden');
             document.getElementById('complemento-title').innerText = itemName;
+            document.getElementById('item-base-price').innerText = `Preço base: R$ ${basePrice.toFixed(2)}`;
             
-            // Configura o botão de voltar da tela de complementos
-            document.getElementById('btn-back-complementos').onclick = () => showCategory(type === 'acai' ? 'acai' : 'lanches');
+            document.getElementById('btn-back-complementos').onclick = () => showCategory(type);
 
-            // Renderiza as opções
             const container = document.getElementById('options-container');
             container.innerHTML = '';
             
             const options = complementosData[type];
             options.forEach(opt => {
                 const div = document.createElement('div');
-                div.className = 'glass p-4 rounded-xl flex items-center justify-between cursor-pointer hover:bg-white/10 transition-all';
+                div.className = 'glass p-4 rounded-xl flex items-center justify-between cursor-pointer hover:bg-white/5 transition-all';
                 div.innerHTML = `
                     <div class="flex items-center gap-3">
-                        <input type="checkbox" class="w-5 h-5 accent-purple-500 rounded border-none">
-                        <span class="font-medium">${opt.name}</span>
+                        <input type="checkbox" data-name="${opt.name}" data-price="${opt.price}" class="complemento-cb w-5 h-5 accent-purple-500 rounded border-none pointer-events-none">
+                        <span class="font-medium text-sm">${opt.name}</span>
                     </div>
-                    <span class="text-xs font-bold text-green-400">${opt.price}</span>
+                    <span class="text-xs font-bold text-green-400">${opt.price === 0 ? 'Grátis' : 'R$ '+opt.price.toFixed(2)}</span>
                 `;
-                div.onclick = (e) => {
-                    if(e.target.tagName !== 'INPUT') {
-                        const cb = div.querySelector('input');
-                        cb.checked = !cb.checked;
-                    }
+                div.onclick = () => {
+                    const cb = div.querySelector('input');
+                    cb.checked = !cb.checked;
                 };
                 container.appendChild(div);
             });
-            
             window.scrollTo(0, 0);
         }
 
         function hideAllViews() {
-            const views = ['home-view', 'acai-view', 'lanches-view', 'complementos-view'];
+            const views = ['home-view', 'acai-view', 'lanches-view', 'complementos-view', 'cart-view'];
             views.forEach(id => document.getElementById(id).classList.add('hidden'));
         }
 
         function confirmOrder() {
-            // Aqui futuramente você pode adicionar ao carrinho
-            showHome();
-            // Um pequeno feedback visual
-            const feedback = document.createElement('div');
-            feedback.className = 'fixed bottom-10 bg-green-600 text-white px-6 py-3 rounded-full shadow-2xl animate-bounce z-50';
-            feedback.innerText = 'Item adicionado com sucesso! ✅';
-            document.body.appendChild(feedback);
-            setTimeout(() => feedback.remove(), 3000);
+            const selectedComps = [];
+            let extraPrice = 0;
+            
+            document.querySelectorAll('.complemento-cb:checked').forEach(cb => {
+                selectedComps.push(cb.dataset.name);
+                extraPrice += parseFloat(cb.dataset.price);
+            });
+
+            cart.push({
+                id: Date.now(),
+                name: currentItemName,
+                totalPrice: currentItemPrice + extraPrice,
+                complements: selectedComps
+            });
+
+            updateCartUI();
+            
+            // VOLTA PARA ONDE ESTAVA (iFood style)
+            showCategory(currentType);
+
+            // Toast de sucesso
+            showToast('Adicionado com sucesso! ✅');
+        }
+
+        function updateCartUI() {
+            const bar = document.getElementById('cart-bottom-bar');
+            const total = cart.reduce((acc, item) => acc + item.totalPrice, 0);
+            
+            if (cart.length > 0) {
+                bar.classList.remove('translate-y-full');
+                document.getElementById('bar-count').innerText = cart.length;
+                document.getElementById('bar-total').innerText = `R$ ${total.toFixed(2)}`;
+            } else {
+                bar.classList.add('translate-y-full');
+            }
+        }
+
+        function showCart() {
+            hideAllViews();
+            document.getElementById('cart-view').classList.remove('hidden');
+            
+            const container = document.getElementById('cart-items');
+            const emptyMsg = document.getElementById('cart-empty-msg');
+            const totalSection = document.getElementById('cart-total-section');
+            
+            container.innerHTML = '';
+            
+            if (cart.length === 0) {
+                emptyMsg.classList.remove('hidden');
+                totalSection.classList.add('hidden');
+            } else {
+                emptyMsg.classList.add('hidden');
+                totalSection.classList.remove('hidden');
+                
+                cart.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'glass p-4 rounded-2xl flex justify-between items-start';
+                    div.innerHTML = `
+                        <div class="flex-1">
+                            <h4 class="font-bold text-lg leading-tight">${item.name}</h4>
+                            <p class="text-[10px] text-purple-200/50 mt-1 italic">
+                                ${item.complements.join(', ') || 'Simples'}
+                            </p>
+                            <span class="text-green-400 font-bold text-sm block mt-2">R$ ${item.totalPrice.toFixed(2)}</span>
+                        </div>
+                        <button onclick="removeItem(${item.id})" class="p-2 text-red-400 hover:bg-red-400/10 rounded-lg">✕</button>
+                    `;
+                    container.appendChild(div);
+                });
+                
+                const totalGeral = cart.reduce((acc, item) => acc + item.totalPrice, 0);
+                document.getElementById('cart-total').innerText = `R$ ${totalGeral.toFixed(2)}`;
+            }
+            window.scrollTo(0, 0);
+        }
+
+        function goBackFromCart() {
+            if (currentType) showCategory(currentType);
+            else showHome();
+        }
+
+        function removeItem(id) {
+            cart = cart.filter(item => item.id !== id);
+            showCart();
+            updateCartUI();
+        }
+
+        function clearCart() {
+            cart = [];
+            showCart();
+            updateCartUI();
+        }
+
+        function showToast(msg) {
+            const toast = document.createElement('div');
+            toast.className = 'fixed top-10 bg-purple-600 text-white px-6 py-3 rounded-full shadow-2xl animate-bounce z-[60] font-bold';
+            toast.innerText = msg;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2500);
+        }
+
+        function sendWhatsAppOrder() {
+            if (cart.length === 0) return;
+            let total = 0;
+            let msg = `*👑 REI DO AÇAÍ* \n\n`;
+            cart.forEach((item, i) => {
+                total += item.totalPrice;
+                msg += `*${i+1}. ${item.name}* (R$ ${item.totalPrice.toFixed(2)})\n`;
+                if(item.complements.length > 0) msg += `_Adic: ${item.complements.join(', ')}_\n`;
+                msg += `\n`;
+            });
+            msg += `*TOTAL: R$ ${total.toFixed(2)}*`;
+            window.open(`https://wa.me/5511999999999?text=${encodeURIComponent(msg)}`, '_blank');
         }
     </script>
     
